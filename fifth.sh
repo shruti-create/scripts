@@ -2,7 +2,6 @@
 
 # FILE FOR PROCESSING LOG FILES
 # Assumes: in "run-test" folder, there is an "inputs" folder with individual subdirectories containing both .com and .log files
-# Update this script as necessary for your specific needs
 # MAKE SURE THIS IS RUNNING IN THE RIGHT DIRECTORY
 
 # SSH into remote server
