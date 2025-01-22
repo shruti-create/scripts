@@ -8,7 +8,7 @@
     ```
     /expanse/lustre/projects/csd799/rramji/shruti-AICD-demo/run
     ----/progress-files
-    --------sbatch-gaussian.sh (runs on all items in inputs)
+    --------sbatch-gaussian.sh (runs on all items in inputs -- needs to be modified w/path of folders)
     --------sbatch-gaussian-2.sh (needs to run on all items in inputs - modify)
     --------identify_pi_MOs.py
     ----/inputs
