@@ -2,7 +2,7 @@
 
 # FILE FOR PROCESSING LOG FILES
 # Assumes: in "run-test" folder, there is an "inputs" folder with individual subdirectories containing both .com and .log files
-# MAKE SURE THIS IS RUNNING IN THE RIGHT DIRECTORY
+# MAKE SURE THIS IS RUNNING IN THE RIGHT DIRECTORIES
 
 # SSH into remote server
 ssh shbhamidipati@login.expanse.sdsc.edu << 'EOF'
