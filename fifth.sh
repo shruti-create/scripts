@@ -2,7 +2,6 @@
 
 # FILE FOR PROCESSING LOG FILES
 # Assumes: in "run-test" folder, there is an "inputs" folder with individual subdirectories containing both .com and .log files
-# Replace `your_command` with the command you want to run on each log file
 # Update this script as necessary for your specific needs
 # MAKE SURE THIS IS RUNNING IN THE RIGHT DIRECTORY
 
