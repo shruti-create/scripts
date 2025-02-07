@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # FILE FOR PREPARING INPUTS FOR SECOND GAUSSIAN
-# Assumes: in run-test folder, you have an inputs folder with individual folders per input with both com and log files 
+# Assumes: in run folder, you have an inputs folder with individual folders per input with both com and log files 
 # Assumes: Python script in progress-files folder
 # Goal: run python script on every log file and then add the pi-MOs found to the end of the .com file
 
@@ -15,10 +15,9 @@ for dir in ./inputs/*/; do
         numbers=$(python3 ./progress-files/identify_pi_MOs.py --file "$log_file" --num_orbitals 6)
         com_file=$(find "$dir" -maxdepth 1 -name "*.com")
         if [[ -f "$com_file" ]]; then
-            # Replace the specific line in the .com file
+            # replace the specific line in the .com file
             sed -i 's/^#HF\/6-31G\* scf=tight pop=full/#HF\/6-31G\* scf=tight nmr=csgt iop(10\/93=2)/' "$com_file"
             
-            # Append additional information to the .com file
             sed -i '${s/$/test.txt/}' "$com_file"  # Append "test.txt" to the last line            
             echo "" >> "$com_file"
             echo "$numbers" >> "$com_file"

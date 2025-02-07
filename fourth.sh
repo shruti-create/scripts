@@ -2,41 +2,33 @@
 
 # FILE FOR RUNNING FIRST GAUSSIAN
 # Assumes: in run folder, you have an inputs folder with individual folders per input
-# Assumes: in run folder, you have the sbatch file: sbatch-gaussian-2.sh in progress-files folder
-# Goal: copy sbatch-gaussian-2.sh to each individual folder and run it, ensuring only 2 jobs run at a time
-# CHANGE THIS FILE TO BE LIKE SECOND.SH --> NEED ONE FILE TO RUN ON ALL AND CD INTO DIRECTORY 
+# Assumes: in run folder, you have the sbatch files: sbatch-gaussian-[phi].sh in progress-files folder (runs by phi value)
+# Goal: runs gaussian on all new inputs
 
 ssh shbhamidipati@login.expanse.sdsc.edu << EOF
 source myenv/bin/activate
 cd /expanse/lustre/projects/csd799/rramji/shruti-AICD-demo/run
 
-# path to the sbatch-gaussian-2.sh file
-sbatch_file="./progress-files/sbatch-gaussian-2.sh"
+sbatch_dir="./progress-files"
 
-# function to check running jobs and wait if needed
-function wait_for_available_slots() {
-    while true; do
-        # count the number of running jobs for the user
-        running_jobs=\$(squeue -u shbhamidipati --noheader | awk '\$5 == "R" {count++} END {print count+0}')
+# 5 and 50 have switched sbatch files
+numbers=(0 5 10 15 20 25 30 40 50 60)
 
-        # if running jobs are less than 2, break the loop and continue
-        if [[ \$running_jobs -lt 1 ]]; then
-            break
-        fi
-
-        # wait for 30 seconds before checking again
-        sleep 30
+for num in "\${numbers[@]}"; do
+    sbatch_file="\$sbatch_dir/sbatch-gaussian-\${num}.sh"
+    
+    # Submit the sbatch file
+    echo "Submitting \$sbatch_file..."
+    job_id=\$(sbatch "\$sbatch_file" | awk '{print \$4}')
+    echo "Submitted job ID: \$job_id"
+    
+    # Wait until the job is completed
+    echo "Waiting for job \$job_id to complete..."
+    while squeue | grep -q "\$job_id"; do
+        sleep 10  # Check every 10 seconds
     done
-}
-
-for dir in ./inputs/*/; do
-    if [[ -d "\$dir" ]]; then
-        cp "\$sbatch_file" "\$dir"
-
-        wait_for_available_slots
-
-        (cd "\$dir" && sbatch sbatch-gaussian-2.sh)
-    fi
+    echo "Job \$job_id completed."
 done
 
 EOF
+
