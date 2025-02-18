@@ -12,7 +12,8 @@ cd /expanse/lustre/projects/csd799/rramji/shruti-AICD-demo/run
 sbatch_dir="./progress-files"
 
 # 5 and 50 have switched sbatch files
-numbers=(0 5 10 15 20 25 30 40 50 60)
+# all 0 5 10 15 20 25 30 40 50 60
+numbers=(60 60)
 
 for num in "\${numbers[@]}"; do
     sbatch_file="\$sbatch_dir/sbatch-gaussian-\${num}.sh"

@@ -12,7 +12,7 @@ cd /expanse/lustre/projects/csd799/rramji/shruti-AICD-demo/run
 for dir in ./inputs/*/; do
     log_file=$(find "$dir" -maxdepth 1 -name "*.log")
     if [[ -f "$log_file" ]]; then
-        numbers=$(python3 ./progress-files/identify_pi_MOs.py --file "$log_file" --num_orbitals 6)
+        numbers=$(python3 ./progress-files/identify_pi_MOs.py --file "$log_file" --num_orbitals 10)
         com_file=$(find "$dir" -maxdepth 1 -name "*.com")
         if [[ -f "$com_file" ]]; then
             # replace the specific line in the .com file

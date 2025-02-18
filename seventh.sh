@@ -4,7 +4,7 @@
 REMOTE_USER="shbhamidipati"
 REMOTE_HOST="login.expanse.sdsc.edu"
 REMOTE_DIR="/expanse/lustre/projects/csd799/rramji/shruti-AICD-demo/run/inputs"
-LOCAL_DIR=~/Desktop/pdb-files
+LOCAL_DIR=~/Desktop/pdb-files2
 
 mkdir -p "$LOCAL_DIR"
 
