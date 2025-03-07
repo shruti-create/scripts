@@ -11,19 +11,16 @@ cd /expanse/lustre/projects/csd799/rramji/shruti-AICD-demo/run
 
 sbatch_dir="./progress-files"
 
-# 5 and 50 have switched sbatch files
 # all 0 5 10 15 20 25 30 40 50 60
 numbers=(30)
 
 for num in "\${numbers[@]}"; do
     sbatch_file="\$sbatch_dir/sbatch-gaussian-\${num}.sh"
     
-    # Submit the sbatch file
     echo "Submitting \$sbatch_file..."
     job_id=\$(sbatch "\$sbatch_file" | awk '{print \$4}')
     echo "Submitted job ID: \$job_id"
     
-    # Wait until the job is completed
     echo "Waiting for job \$job_id to complete..."
     while squeue | grep -q "\$job_id"; do
         sleep 10  # Check every 10 seconds

@@ -10,7 +10,6 @@ mkdir -p "$LOCAL_DIR"
 
 echo "Connecting to ${REMOTE_HOST} to find one PDB file per folder..."
 
-# Get one .pdb file per folder on the remote machine
 pdb_list=$(ssh ${REMOTE_USER}@${REMOTE_HOST} "
     find ${REMOTE_DIR} -type f -name '*.pdb' | 
     awk -F'/' '{folders[\$0] = \$0} END {for (f in folders) print folders[f]}'"
@@ -23,7 +22,6 @@ fi
 
 echo "File list retrieved. Downloading files..."
 
-# Use rsync to transfer only the selected files
 while IFS= read -r remote_file; do
     relative_path="${remote_file#${REMOTE_DIR}/}"
     local_file_path="${LOCAL_DIR}/${relative_path}"
