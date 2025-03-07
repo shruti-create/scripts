@@ -13,7 +13,7 @@ sbatch_dir="./progress-files"
 
 # 5 and 50 have switched sbatch files
 # all 0 5 10 15 20 25 30 40 50 60
-numbers=(60 60)
+numbers=(30)
 
 for num in "\${numbers[@]}"; do
     sbatch_file="\$sbatch_dir/sbatch-gaussian-\${num}.sh"
